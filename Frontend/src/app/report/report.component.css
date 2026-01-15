@@ -1,0 +1,375 @@
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1b2b52;
+  margin: 0;
+}
+
+/* Header i navigacija */
+header.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+.navbar img.logo {
+  position: absolute;
+  left: 40px;
+  height: 70px;
+  border-radius: 6px;
+}
+.navbar h1 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.nav-links {
+  margin-top: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 15px 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+.nav-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #e9ecef;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+.nav-links i {
+  font-size: 1.3rem;
+  margin-bottom: 3px;
+  color: #9fd3c7;
+}
+.nav-links a:hover i {
+  color: #5cb85c;
+  transform: scale(1.1);
+}
+.active-link i {
+  color: #5cb85c !important;
+}
+
+/* Glavni sadržaj */
+.report-page {
+  max-width: 800px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+}
+.page-title {
+  text-align: center;
+  margin-top: 40px; /* 🔹 razmak između nav i naslova */
+  margin-bottom: 25px;
+  color: #1b2b52;
+}
+
+/* 🔍 Pretraga */
+.search-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+.search-box i {
+  color: #5cb85c;
+  font-size: 1rem;
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 0.95rem;
+  color: #1b2b52;
+}
+
+/* Sekcija */
+.card-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+}
+.card-section h3 {
+  font-size: 1.2rem;
+  color: #1b2b52;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 6px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-section h3 i {
+  color: #5cb85c;
+}
+
+/* Tabela */
+.table-container {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead {
+  background: #1b2b52;
+  color: #fff;
+}
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+tbody tr:hover {
+  background: #f1f3f6;
+}
+.actions-col {
+  width: 80px;
+}
+.actions-cell {
+  text-align: left;
+}
+
+/* Dugme generiši */
+.btn-generate {
+  background: none;
+  border: none;
+  color: #5cb85c;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-generate:hover {
+  color: #4cae4c;
+  transform: scale(1.2);
+}
+
+/* Prazan sadržaj */
+.alert-box {
+  text-align: center;
+  background: #e6eef7;
+  color: #1b2b52;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.actions-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.logout-btn {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+}
+
+.logout-btn i {
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 12px rgba(92, 184, 92, 0.4);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0 25px;
+}
+
+.tab {
+  background: #e9ecef;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #1b2b52;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.tab i {
+  color: #5cb85c;
+}
+
+.tab:hover {
+  background: #dfe6ed;
+  transform: translateY(-2px);
+}
+
+.tab.active {
+  background: #1b2b52;
+  color: #fff;
+}
+
+.tab.active i {
+  color: #5cb85c;
+}
+
+/* Report tables (Archive & Verify) */
+.report-page table {
+  margin-top: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.report-page thead {
+  background: #1b2b52;
+}
+
+.report-page th {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.report-page td {
+  font-size: 0.95rem;
+}
+
+.report-page tbody tr:hover {
+  background: #f4f7fb;
+}
+
+/* Action buttons */
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+
+/* Approve */
+.btn-green {
+  background: #5cb85c;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.btn-green:hover {
+  background: #4cae4c;
+  box-shadow: 0 0 10px rgba(92,184,92,0.4);
+}
+
+/* Reject */
+.btn-red {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-red:hover {
+  background: #c82333;
+  box-shadow: 0 0 10px rgba(220,53,69,0.4);
+}
+
+.card-section {
+  margin-bottom: 40px;
+}
+
+.alert-box {
+  margin-top: 30px;
+}
+
+/* Preview button */
+.btn-preview {
+  background: #e9ecef;
+  border: none;
+  color: #1b2b52;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-preview:hover {
+  background: #dfe6ed;
+  transform: scale(1.1);
+}
+
+.btn-preview i {
+  color: #5cb85c;
+}
+
+/* Status badges */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Info text */
+.info-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #856404;
+}
+
+.rejected-text {
+  color: #721c24;
+}

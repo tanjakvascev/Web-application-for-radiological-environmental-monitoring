@@ -1,0 +1,236 @@
+/* Globalni stil */
+body {
+  background-color: #f0f2f5;
+  color: #1b2b52;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.navbar img.logo {
+  position: absolute;
+  left: 40px;
+  height: 70px;
+  border-radius: 6px;
+}
+
+.navbar h1 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Dugme za odjavu */
+.logout-btn {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+}
+
+.logout-btn i {
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 12px rgba(92, 184, 92, 0.4);
+}
+
+/* Glavni sadržaj */
+.users-page {
+  padding-top: 140px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.page-title {
+  text-align: center;
+  color: #1b2b52;
+  margin-bottom: 30px;
+  font-size: 1.6rem;
+}
+
+/* Sekcija sa tabelom */
+.table-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: #1b2b52;
+  font-weight: 600;
+  margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+/* Tabela */
+.table-container {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #1b2b52;
+  color: #fff;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+tbody tr:hover {
+  background: #f1f3f6;
+}
+
+.icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1.1rem;
+}
+
+.icon-btn.danger i {
+  color: #b02a37;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Sekcija za dodavanje korisnika */
+.add-user, .change-password {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  margin-left: 0; /* poravnato s tabelom */
+}
+
+.forms-row {
+  display: flex;
+  gap: 40px; /* razmak između njih */
+  margin-top: 30px;
+  align-items: flex-start;
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+label {
+  font-weight: 600;
+  color: #1b2b52;
+}
+
+input,
+select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  background: #f8f9fa;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+input:hover,
+select:hover {
+  border-color: #5cb85c;
+}
+
+input:focus,
+select:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 3px rgba(92, 184, 92, 0.2);
+  outline: none;
+}
+
+/* Dugme za dodavanje */
+.btn-primary {
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 12px rgba(76, 174, 76, 0.3);
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%; /* ključni deo */
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* prostor za ikonicu */
+}
+
+.password-container i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 1.2rem;
+  transition: 0.3s ease;
+}
+
+.password-container i:hover {
+  color: #5cb85c;
+}

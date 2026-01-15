@@ -1,0 +1,139 @@
+<body>
+  <!-- ✅ Header -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo">
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <!-- ✅ Navigacija -->
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link"><i class="fa fa-home"></i><span>Početna</span></a>
+    <a routerLink="/samplesView" routerLinkActive="active-link"><i class="fa fa-flask"></i><span>Pregled uzoraka</span></a>
+    <a routerLink="/addNewSample" routerLinkActive="active-link"><i class="fa fa-plus-circle"></i><span>Dodavanje uzorka</span></a>
+    <a routerLink="/invoice" routerLinkActive="active-link"><i class="fa fa-clipboard-list"></i><span>Evidencija</span></a>
+    <a routerLink="/report" routerLinkActive="active-link"><i class="fa fa-chart-line"></i><span>Izveštavanje</span></a>
+  </nav>
+
+  <!-- ✅ Glavni sadržaj -->
+  <main class="add-page">
+    <h2 class="page-title">Dodavanje uzoraka</h2>
+
+    <!-- ✅ Izbor načina unosa -->
+    <div class="method-select">
+      <label>Izaberite način unosa podataka:</label><br>
+      <select [(ngModel)]="selectedMethod">
+        <option value="" disabled selected hidden>-- Izaberi način --</option>
+        <option value="manualInput">Ručno unošenje podataka</option>
+        <option value="documentInput">Upload Word dokumenta</option>
+      </select>
+    </div>
+
+    <!-- ✅ Ručni unos prikaz kao kartice -->
+    @if(selectedMethod == "manualInput"){
+      <section class="cards-container">
+        @for(s of newSamples; track $index; let i = $index){
+          <div class="sample-card">
+            <div class="card-header">
+              <h4>Uzorak {{ i + 1 }}</h4>
+              <button class="icon-btn danger" (click)="removeNewSample(i)" title="Obriši uzorak">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <div class="form-row">
+                <label>Interna oznaka:</label>
+                <select [(ngModel)]="s.internID">
+                  <option value="" disabled selected hidden>-- Izaberite --</option>
+                  <option value="EH25">EH25</option>
+                  <option value="H25">H25</option>
+                  <option value="S25">S25</option>
+                  <option value="D25">D25</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label>Broj uzorka:</label>
+                <input [(ngModel)]="s.sampleID" placeholder="Unesite broj uzorka" />
+              </div>
+
+              <div class="form-row wide">
+                <label>Naziv uzorka:</label>
+                <textarea [(ngModel)]="s.name" rows="2" placeholder="Unesite naziv uzorka..."></textarea>
+              </div>
+
+              <div class="form-row">
+                <label>Poreklo:</label>
+                <input [(ngModel)]="s.origin" placeholder="Poreklo uzorka" />
+              </div>
+
+              <div class="form-row">
+                <label>Datum prijema:</label>
+                <input type="date" [(ngModel)]="s.dateReception" />
+              </div>
+
+              <div class="form-row">
+                <label>Datum merenja:</label>
+                <input type="date" [(ngModel)]="s.dateMeasure" />
+              </div>
+
+              <div class="form-row">
+                <label>Vrsta ispitivanja:</label>
+                <input [(ngModel)]="s.type" placeholder="Vrsta ispitivanja" />
+              </div>
+
+              <div class="form-row wide">
+                <label>Napomena:</label>
+                <textarea [(ngModel)]="s.note" rows="2" placeholder="Napomena o uzorku..."></textarea>
+              </div>
+
+              <div class="form-row">
+                <label>Geometrija:</label>
+                <select [(ngModel)]="s.geometry">
+                  <option value="" disabled selected hidden>-- Geometrija --</option>
+                  <option>PAV50</option>
+                  <option>PAV200</option>
+                  <option>M450</option>
+                  <option>M1000-182</option>
+                  <option>M1000-952</option>
+                  <option>M1000-1648</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label>Detektor:</label>
+                <select [(ngModel)]="s.detector">
+                  <option value="" disabled selected hidden>-- Detektor --</option>
+                  <option>D1</option>
+                  <option>D2</option>
+                  <option>D3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        }
+
+        <div class="actions">
+          <button class="btn-outline" (click)="addNewSample()">
+            <i class="fa fa-plus"></i> Dodaj novi uzorak
+          </button>
+          <button class="btn-primary" (click)="saveAll()">
+            <i class="fa fa-save"></i> Sačuvaj sve u bazu
+          </button>
+        </div>
+      </section>
+    }
+
+    <!-- ✅ Upload -->
+    @else if(selectedMethod == "documentInput"){
+      <section class="upload-section">
+        <h3><i class="fa fa-file-word"></i> Uvezi podatke iz Word dokumenta</h3>
+        <input type="file" accept=".doc,.docx" (change)="onFileSelected($event)" class="file-input" />
+      </section>
+    }
+  </main>
+</body>

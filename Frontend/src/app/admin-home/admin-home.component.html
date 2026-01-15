@@ -1,0 +1,127 @@
+<body>
+  <!-- Navigacija -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo" />
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <main class="users-page">
+    <h2 class="page-title">Upravljanje korisnicima</h2>
+
+    <!-- Pregled postojećih korisnika -->
+    <section class="table-section">
+      <h4 class="section-title">Pregled korisnika</h4>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Korisničko ime</th>
+              <th>Uloga</th>
+              <th>Obriši</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (u of users; track $index) {
+            <tr>
+              <td>{{ u.username }}</td>
+              <td>{{ u.role }}</td>
+              <td>
+                <button class="icon-btn danger" (click)="deleteUser(u)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="forms-row">
+      <section class="add-user">
+        <h4 class="section-title">Dodaj novog korisnika</h4>
+        <div class="form-container">
+          <label>Ime:</label>
+          <input [(ngModel)]="name" placeholder="Unesite ime" />
+          <label>Prezime:</label>
+          <input [(ngModel)]="lastname" placeholder="Unesite prezime" />
+          <label>Mejl:</label>
+          <input [(ngModel)]="email" placeholder="Unesite mejl adresu" />
+
+          <label>Korisničko ime:</label>
+          <input [(ngModel)]="username" placeholder="Unesite korisničko ime" />
+
+          <label>Lozinka:</label>
+          <div class="password-container">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              placeholder="Unesite lozinku"
+            />
+            <i
+              class="fa"
+              [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+              (click)="togglePassword()"
+            ></i>
+          </div>
+
+
+          <label>Uloga:</label>
+          <select [(ngModel)]="role">
+            <option value="korisnik">Korisnik</option>
+            <option value="admin">Administrator</option>
+          </select>
+
+          <button class="btn-primary" (click)="addNewUser()">
+            <i class="fa fa-user-plus"></i> Dodaj korisnika
+          </button>
+        </div>
+      </section>
+
+      <section class="change-password">
+        <h4 class="section-title">Promeni lozinku korisnika</h4>
+        <div class="form-container">
+
+          <label>Korisničko ime:</label>
+          <input [(ngModel)]="username2" placeholder="Unesite korisničko ime" />
+
+          <label>Stara lozinka:</label>
+          <div class="password-container">
+            <input
+              [type]="showOldPassword ? 'text' : 'password'"
+              [(ngModel)]="oldPassword"
+              placeholder="Unesite novu lozinku"
+            />
+            <i
+              class="fa"
+              [ngClass]="showOldPassword ? 'fa-eye-slash' : 'fa-eye'"
+              (click)="toggleOldPassword()"
+            ></i>
+          </div>
+
+          <label>Nova lozinka:</label>
+          <div class="password-container">
+            <input
+              [type]="showNewPassword ? 'text' : 'password'"
+              [(ngModel)]="newPassword"
+              placeholder="Unesite novu lozinku"
+            />
+            <i
+              class="fa"
+              [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"
+              (click)="toggleNewPassword()"
+            ></i>
+          </div>
+
+          <button class="btn-primary" (click)="changePassword()">
+            <i class="fa fa-key"></i> Promeni lozinku
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>

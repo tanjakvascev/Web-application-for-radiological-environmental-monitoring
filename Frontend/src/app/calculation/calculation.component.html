@@ -1,0 +1,161 @@
+<body>
+  <!-- Gornja navigacija -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo">
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <!-- Sekundarna navigacija -->
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link">
+      <i class="fa fa-home"></i><span>Početna</span>
+    </a>
+    <a routerLink="/samplesView" routerLinkActive="active-link">
+      <i class="fa fa-flask"></i><span>Pregled uzoraka</span>
+    </a>
+    <a routerLink="/addNewSample" routerLinkActive="active-link">
+      <i class="fa fa-plus-circle"></i><span>Dodavanje uzorka</span>
+    </a>
+    <a routerLink="/invoice" routerLinkActive="active-link">
+      <i class="fa fa-clipboard-list"></i><span>Evidencija</span>
+    </a>
+    <a routerLink="/report" routerLinkActive="active-link">
+      <i class="fa fa-chart-line"></i><span>Izveštavanje</span>
+    </a>
+  </nav>
+
+  <!-- Glavni sadržaj -->
+  <main class="calculation-page">
+    <h2 class="page-title">Račun za evidenciju</h2>
+
+    <section class="info-card">
+      <h4>
+        <span class="highlight">Interna oznaka:</span> {{ sample.internID }} |
+        <span class="highlight">Detektor:</span> {{ sample.detector }} |
+        <span class="highlight">Geometrija:</span> {{ sample.geometry }}
+      </h4>
+
+      <div class="input-group">
+        <div>
+          <label>⏱️ Vreme merenja (s):</label>
+          <input type="number" [(ngModel)]="time" placeholder="npr. 3600" />
+        </div>
+        <div>
+          <label>⚖️ Količina uzorka (kg):</label>
+          <input type="number" [(ngModel)]="quantity" placeholder="npr. 0.1234" step="0.0001" />
+        </div>
+      </div>
+    </section>
+
+    <section class="isotope-section">
+      <div class="section-header">
+        <h3><i class="fa fa-atom"></i> Izotopi i energija</h3>
+      </div>
+
+      <div class="isotope-grid">
+        @for (isotope of newIsotopes; track $index; let i = $index) {
+          <div class="isotope-card">
+            <div class="card-header">
+              <h5>Izotop #{{ i + 1 }}</h5>
+              <button class="icon-btn danger" (click)="removeIsotope(i)" title="Obriši izotop">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <label>Izotop:</label>
+              <select [(ngModel)]="isotope.name" (change)="updateIsotopeEnergy(isotope)">
+                <option value="" disabled selected hidden>-- Izaberite izotop --</option>
+                <option value="Cs-137">Cs-137</option>
+                <option value="K-40">K-40</option>
+                <option value="Cs-134">Cs-134</option>
+              </select>
+
+              <div class="info-line">Energija: <strong>{{ isotope.energy }}</strong> keV</div>
+
+              <label>NET area:</label>
+              <input type="number" [(ngModel)]="isotope.NETarea" />
+
+              <label>GROSS area:</label>
+              <input type="number" [(ngModel)]="isotope.GROSSarea" />
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- ✅ Dugme sada ispod sekcije -->
+      <div class="isotope-actions">
+        <button class="btn-outline" (click)="addIsotope()">
+          ➕ Dodaj izotop
+        </button>
+      </div>
+    </section>
+
+
+    <!-- Dugmad -->
+    <div class="actions">
+      <button class="btn-outline" (click)="calculate()">
+        <i class="fa fa-calculator"></i> Izvrši proračun
+      </button>
+      <button class="btn-primary" (click)="saveCalculation()">
+        <i class="fa fa-save"></i> Sačuvaj proračun
+      </button>
+    </div>
+
+    <!-- Rezultati -->
+    <section class="results-section">
+      <h3 class="section-title"><i class="fa fa-table"></i> Rezultati proračuna</h3>
+
+      @if (calculations.length > 0) {
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Izotop</th>
+                <th>Energija (keV)</th>
+                <th>Ia (%)</th>
+                <th>Koeficijent</th>
+                <th>NET</th>
+                <th>GROSS</th>
+                <th>BCKG</th>
+                <th>FON</th>
+                <th>Aktivnost (Bq)</th>
+                <th>Spec. aktivnost (Bq/kg)</th>
+                <th>Greška</th>
+                <th>MDA (Bq/kg)</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (calc of calculations; track $index; let i = $index) {
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ calc.isotope }}</td>
+                  <td>{{ calc.energy }}</td>
+                  <td>{{ calc.Ia }}</td>
+                  <td>{{ calc.coeff | number:'1.6-6' }}</td>
+                  <td>{{ calc.NET }}</td>
+                  <td>{{ calc.GROSS }}</td>
+                  <td>{{ calc.BCKG }}</td>
+                  <td>{{ calc.FON }}</td>
+                  <td>{{ calc.activity ? (calc.activity | number:'1.2-2') : 'Nepotpuna' }}</td>
+                  <td>{{ calc.specialActivity | number:'1.2-2' }}</td>
+                  <td>{{ calc.error == '*' ? '*' : (calc.error | number:'1.2-2') }}</td>
+                  <td>{{ calc.MDA | number:'1.2-2' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <div class="alert-box">
+          Nema rezultata za prikaz.
+        </div>
+      }
+    </section>
+  </main>
+</body>

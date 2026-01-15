@@ -1,0 +1,220 @@
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1b2b52;
+  margin: 0;
+}
+
+/* Header i navigacija */
+header.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+.navbar img.logo {
+  position: absolute;
+  left: 40px;
+  height: 70px;
+  border-radius: 6px;
+}
+.navbar h1 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.nav-links {
+  margin-top: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 15px 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+.nav-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #e9ecef;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+.nav-links i {
+  font-size: 1.3rem;
+  margin-bottom: 3px;
+  color: #9fd3c7;
+}
+.nav-links a:hover i {
+  color: #5cb85c;
+  transform: scale(1.1);
+}
+.active-link i {
+  color: #5cb85c !important;
+}
+
+/* Stranica */
+.invoice-page {
+  max-width: 1200px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+}
+.page-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1b2b52;
+}
+
+/* Sekcije */
+.card-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  margin-bottom: 40px;
+}
+.card-section h3 {
+  font-size: 1.2rem;
+  color: #1b2b52;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 6px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-section h3 i {
+  color: #5cb85c;
+}
+
+/* Tabela */
+.table-container {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead {
+  background: #1b2b52;
+  color: #fff;
+}
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+tbody tr:hover {
+  background: #f1f3f6;
+}
+
+/* Input polja */
+input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  background: #f8f9fa;
+  transition: 0.3s;
+}
+input:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 3px rgba(92, 184, 92, 0.25);
+  outline: none;
+}
+
+/* Dugmad i akcije */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+.btn-outline, .btn-primary {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-outline {
+  background-color: #ffffff;
+  border: 1px solid #a2b3c2;
+  color: #1b2b52;
+}
+.btn-outline:hover {
+  background-color: #e6eef7;
+  border-color: #5cb85c;
+}
+.btn-primary {
+  background-color: #5cb85c;
+  color: white;
+  box-shadow: 0 3px 8px rgba(92, 184, 92, 0.25);
+}
+.btn-primary:hover {
+  background-color: #4cae4c;
+}
+
+/* Ikonica za brisanje */
+.icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.icon-btn.danger i {
+  color: #b02a37;
+  font-size: 1.1rem;
+}
+.icon-btn.danger:hover i {
+  color: #ff6961;
+  transform: scale(1.2);
+}
+
+/* Prazan sadržaj */
+.alert-box {
+  text-align: center;
+  background: #e6eef7;
+  color: #1b2b52;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+
+.logout-btn {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+}
+
+.logout-btn i {
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 12px rgba(92, 184, 92, 0.4);
+}
+

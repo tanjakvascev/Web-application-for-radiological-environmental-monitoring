@@ -1,0 +1,188 @@
+<body>
+  <!-- ✅ Gornja navigacija -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo">
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <!-- ✅ Sekundarna navigacija -->
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link">
+      <i class="fa fa-home"></i><span>Početna</span>
+    </a>
+    <a routerLink="/samplesView" routerLinkActive="active-link">
+      <i class="fa fa-flask"></i><span>Pregled uzoraka</span>
+    </a>
+    <a routerLink="/addNewSample" routerLinkActive="active-link">
+      <i class="fa fa-plus-circle"></i><span>Dodavanje uzorka</span>
+    </a>
+    <a routerLink="/invoice" routerLinkActive="active-link">
+      <i class="fa fa-clipboard-list"></i><span>Evidencija</span>
+    </a>
+    <a routerLink="/report" routerLinkActive="active-link">
+      <i class="fa fa-chart-line"></i><span>Izveštavanje</span>
+    </a>
+  </nav>
+
+  <main class="samples-page">
+    <h2 class="page-title">Pregled uzoraka</h2>
+
+    <!-- 🔍 Filteri -->
+    <div class="filters">
+      <div class="filter-box">
+        <div class="search-box">
+          <i class="fa fa-search"></i>
+          <input
+            type="text"
+            placeholder="Pretraži uzorke..."
+            [(ngModel)]="searchText"
+            (input)="filterSamples()"
+          />
+        </div>
+
+        <div class="select-box">
+          <label>Interna oznaka:</label>
+          <select [(ngModel)]="selectedInternID" (change)="filterSamples()">
+            <option value="">Svi uzorci</option>
+            <option value="EH25">EH25</option>
+            <option value="H25">H25</option>
+            <option value="S25">S25</option>
+            <option value="D25">D25</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Interna oznaka</th>
+              <th>Broj uzorka</th>
+              <th>Naziv uzorka</th>
+              <th>Datum prijema</th>
+              <th>Korisnik</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(sample of filteredSamples; track sample.internID){
+              <tr
+                [class.selected]="selectedSample === sample"
+                (click)="selectSample(sample)"
+              >
+                <td>{{ sample.internID }}</td>
+                <td>{{ sample.sampleID }}</td>
+                <td>{{ sample.name }}</td>
+                <td>{{ sample.dateReception | date: 'dd.MM.yyyy' }}</td>
+                <td>{{ sample.user }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+       @if(selectedSample){
+        <div class="details-panel">
+          <h3>Detalji uzorka</h3>
+          <div class="detail-row">
+            <strong>Interna oznaka:</strong> {{ selectedSample.internID }}
+          </div>
+          <div class="detail-row">
+            <strong>Broj uzorka:</strong> {{ selectedSample.sampleID }}
+          </div>
+          <div class="detail-row">
+            <strong>Naziv:</strong>
+             @if(isEditingName == false){
+                {{ selectedSample.name }}
+            }
+            @else{
+              <input
+                [(ngModel)]="editedName"
+                class="edit-input"
+                (keyup.enter)="saveName()"
+              />
+              <button class="save-small" (click)="saveName()">
+                <i class="fa fa-check"></i>
+              </button>
+              <button class="cancel-small" (click)="cancelEdit()">
+                <i class="fa fa-times"></i>
+              </button>
+          }
+          </div>
+          <div class="detail-row">
+            <strong>Poreklo:</strong> {{ selectedSample.origin }}
+          </div>
+          <div class="detail-row">
+            <strong>Datum prijema:</strong> {{ selectedSample.dateReception | date: 'dd.MM.yyyy' }}
+          </div>
+          <div class="detail-row">
+            <strong>Datum merenja:</strong> {{ selectedSample.dateMeasure | date: 'dd.MM.yyyy' }}
+          </div>
+          <div class="detail-row">
+            <strong>Vrsta ispitivanja:</strong>
+            @if(selectedSample.type == "" && selectedSample.internID != ""){
+              /
+            }
+            @else{
+              {{ selectedSample.type }}
+            }
+          </div>
+          <div class="detail-row">
+            <strong>Napomena:</strong>
+            @if(selectedSample.note == "" && selectedSample.internID != ""){
+              /
+            }
+            @else{
+              {{ selectedSample.note }}
+            }
+          </div>
+          <div class="detail-row">
+            <strong>Geometrija:</strong> {{ selectedSample.geometry }}
+          </div>
+          <div class="detail-row">
+            <strong>Detektor:</strong> {{ selectedSample.detector }}
+          </div>
+          @if(selectedSample.name != ""){
+            <button class="btn-history" (click)="toggleHistory()">
+              <i class="fa fa-history"></i> Istorija izmena
+            </button>
+            @if(showHistory == true){
+              <div class="history-box">
+                <h4>Istorija promena naziva</h4>
+                @for(h of selectedSample.nameHistory; track $index){
+                  <div class="history-item">
+                    <strong>{{ h.oldValue }}</strong> → <strong>{{ h.newValue }}</strong>
+                    <br>
+                    <small>{{ h.changedAt | date:'dd.MM.yyyy HH:mm' }} — {{ h.changedBy }}</small>
+                  </div>
+                }
+              </div>
+            }
+
+            <div class="detail-actions">
+              @if(!hasCalculationOrReport){
+                <button
+                  class="btn-action btn-green"
+                  (click)="calculation(selectedSample.internID)"
+                >
+                  <i class="fa fa-calculator"></i> Račun
+                </button>
+              }
+              <button class="btn-action btn-blue" (click)="startEditName()">
+                <i class="fa fa-edit"></i> Izmena
+              </button>
+              <button class="btn-action btn-red" (click)="deleteSample(selectedSample.internID)">
+                <i class="fa fa-trash"></i> Obriši
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </main>
+</body>

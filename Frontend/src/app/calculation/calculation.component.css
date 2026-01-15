@@ -1,0 +1,373 @@
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1b2b52;
+  margin: 0;
+}
+
+/* Header i nav isti kao na ostalim stranicama */
+header.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  z-index: 100;
+}
+.navbar img.logo {
+  position: absolute;
+  left: 40px;
+  height: 70px;
+  border-radius: 6px;
+}
+.navbar h1 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.nav-links {
+  margin-top: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 15px 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+.nav-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #e9ecef;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+.nav-links i {
+  font-size: 1.3rem;
+  margin-bottom: 3px;
+  color: #9fd3c7;
+}
+.nav-links a:hover i {
+  color: #5cb85c;
+  transform: scale(1.1);
+}
+.active-link {
+  color: #fff !important;
+  font-weight: 600;
+}
+.active-link i {
+  color: #5cb85c !important;
+}
+
+/* Glavni sadržaj */
+.calculation-page {
+  max-width: 1200px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+}
+.page-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1b2b52;
+}
+
+/* Info kartica */
+.info-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  margin-bottom: 30px;
+}
+.info-card h4 {
+  margin-bottom: 15px;
+  color: #1b2b52;
+}
+.highlight {
+  color: #5cb85c;
+  font-weight: 600;
+}
+.input-group {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.input-group div {
+  flex: 1;
+  min-width: 250px;
+}
+.input-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+}
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+/* Izotopi */
+/* Izotopi */
+.isotope-section {
+  margin-bottom: 50px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  color: #1b2b52;
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-header i {
+  color: #5cb85c;
+}
+
+/* Mreža kartica */
+.isotope-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Svaka kartica */
+.isotope-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+  border: 1px solid #dee2e6;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding: 0;
+  overflow: hidden;
+}
+
+.isotope-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Zaglavlje kartice */
+.isotope-card .card-header {
+  background-color: #1b2b52;
+  color: #fff;
+  padding: 10px 15px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.isotope-card .card-header h5 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.icon-btn.danger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.icon-btn.danger i {
+  color: #ff6961;
+  font-size: 1.2rem;
+}
+
+.icon-btn.danger:hover i {
+  color: #b02a37;
+  transform: scale(1.2);
+}
+
+/* Telo kartice */
+.isotope-card .card-body {
+  padding: 15px 18px 20px;
+}
+
+.isotope-card label {
+  display: block;
+  font-weight: 600;
+  color: #1b2b52;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.isotope-card select,
+.isotope-card input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  background-color: #f8f9fa;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.isotope-card select:focus,
+.isotope-card input:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 3px rgba(92, 184, 92, 0.2);
+  outline: none;
+}
+
+/* Informativna linija za energiju */
+.info-line {
+  background-color: #eaf4ef;
+  border-left: 4px solid #5cb85c;
+  color: #1b2b52;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Dugme ispod kartica */
+.isotope-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.isotope-actions .btn-outline {
+  background-color: #ffffff;
+  border: 1px solid #a2b3c2;
+  color: #1b2b52;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.isotope-actions .btn-outline:hover {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(92, 184, 92, 0.3);
+}
+
+
+/* Dugmad */
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+.btn-outline,
+.btn-primary {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-outline {
+  background-color: #f8f9fa;
+  color: #1b2b52;
+  border: 1px solid #a2b3c2;
+}
+.btn-outline:hover {
+  background-color: #e6eef7;
+  border-color: #5cb85c;
+}
+.btn-primary {
+  background-color: #5cb85c;
+  color: white;
+  box-shadow: 0 3px 8px rgba(92, 184, 92, 0.25);
+}
+.btn-primary:hover {
+  background-color: #4cae4c;
+}
+
+/* Rezultati */
+.results-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+}
+.section-title {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 8px;
+  color: #1b2b52;
+}
+.table-container {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead {
+  background: #1b2b52;
+  color: #fff;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 0.9rem;
+}
+tbody tr:hover {
+  background: #f1f3f6;
+}
+.alert-box {
+  text-align: center;
+  background: #e6eef7;
+  color: #1b2b52;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.logout-btn {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+}
+
+.logout-btn i {
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 12px rgba(92, 184, 92, 0.4);
+}

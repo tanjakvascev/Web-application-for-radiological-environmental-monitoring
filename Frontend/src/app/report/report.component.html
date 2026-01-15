@@ -1,0 +1,179 @@
+<body>
+  <!-- Gornja navigacija -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo">
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <!-- Sekundarna navigacija -->
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link">
+      <i class="fa fa-home"></i><span>Početna</span>
+    </a>
+    <a routerLink="/samplesView" routerLinkActive="active-link">
+      <i class="fa fa-flask"></i><span>Pregled uzoraka</span>
+    </a>
+    <a routerLink="/addNewSample" routerLinkActive="active-link">
+      <i class="fa fa-plus-circle"></i><span>Dodavanje uzorka</span>
+    </a>
+    <a routerLink="/invoice" routerLinkActive="active-link">
+      <i class="fa fa-clipboard-list"></i><span>Evidencija</span>
+    </a>
+    <a routerLink="/report" routerLinkActive="active-link">
+      <i class="fa fa-chart-line"></i><span>Izveštavanje</span>
+    </a>
+  </nav>
+
+  <!-- Glavni sadržaj -->
+  <main class="report-page">
+    <h2 class="page-title">Generisanje izveštaja</h2>
+
+    <!-- 🔍 Pretraga -->
+    <div class="search-section">
+      <div class="search-box">
+        <i class="fa fa-search"></i>
+        <input
+          type="text"
+          placeholder="Pretraži po internoj oznaci..."
+          [(ngModel)]="searchText"
+          (input)="filterCalculations()"
+        />
+      </div>
+    </div>
+
+    @if (filteredCalculations.length > 0) {
+      <section class="card-section">
+        <h3><i class="fa fa-file-alt"></i> Dostupni rezultati</h3>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Interna oznaka</th>
+                <th class="actions-col">Generiši</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (calculation of filteredCalculations; track $index) {
+                <tr>
+                  <td>{{ calculation.internID }}</td>
+                  <td class="actions-cell">
+                    <button
+                      class="btn-generate"
+                      (click)="viewDetails(calculation)"
+                      title="Generiši izveštaj"
+                    >
+                      <i class="fa fa-file-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    } @else {
+      <div class="alert-box">Nema dostupnih rezultata za prikaz.</div>
+    }
+    <div class="tabs">
+    <button
+      class="tab"
+      [class.active]="activeTab === 'ARCHIVE'"
+      (click)="activeTab = 'ARCHIVE'"
+    >
+      <i class="fa fa-archive"></i> Svi izveštaji
+    </button>
+
+    <button
+      class="tab"
+      [class.active]="activeTab === 'VERIFY'"
+      (click)="activeTab = 'VERIFY'"
+    >
+      <i class="fa fa-check-circle"></i> Verifikacija
+    </button>
+  </div>
+  @if(activeTab === 'ARCHIVE'){
+    <table>
+      <tr>
+        <th>Interna oznaka</th>
+        <th>Datum</th>
+        <th>Status</th>
+        <th>Preuzimanje izveštaja</th>
+      </tr>
+
+      @for(r of reports; track $index){
+        <tr>
+          <td>{{ r.internID }}</td>
+          <td>{{ r.date | date:'dd.MM.yyyy' }}</td>
+
+          <!-- STATUS -->
+          <td>
+            @if(r.status === 'APPROVED'){
+              <span class="status approved">Odobren</span>
+            }
+            @else if(r.status === 'PENDING'){
+              <span class="status pending">Čeka verifikaciju</span>
+            }
+            @else if(r.status === 'REJECTED'){
+              <span class="status rejected">Odbijen</span>
+            }
+          </td>
+
+          <!-- AKCIJE -->
+          <td>
+            @if(r.status === 'APPROVED'){
+              <button (click)="downloadPdf(r.internID)">PDF</button>
+              |
+              <button (click)="downloadWord(r.internID)">Word</button>
+            }
+            @else if(r.status === 'PENDING'){
+              <span class="info-text">⏳ U toku verifikacije</span>
+            }
+            @else if(r.status === 'REJECTED'){
+              <span class="info-text rejected-text">❌ Izveštaj odbijen</span>
+            }
+          </td>
+        </tr>
+      }
+    </table>
+  }
+  @if(activeTab === 'VERIFY'){
+    <table>
+      <tr>
+        <th>Interna oznaka</th>
+        <th>Ispitivač</th>
+        <th>Pregled</th>
+        <th>Akcije</th>
+      </tr>
+
+      @for(r of myPendingReports; track $index){
+        <tr>
+          <td>{{ r.internID }}</td>
+          <td>{{ r.examiner }}</td>
+          <td>
+            <button
+              class="btn-preview"
+              (click)="previewWord(r.internID)"
+              title="Pregled Word izveštaja"
+            >
+              <i class="fa fa-eye"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn-green" (click)="approve(r.internID)">
+              Odobri
+            </button>
+            <button class="btn-red" (click)="reject(r.internID)">
+              Odbij
+            </button>
+          </td>
+        </tr>
+      }
+    </table>
+  }
+  </main>
+</body>

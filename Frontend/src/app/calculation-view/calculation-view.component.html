@@ -1,0 +1,98 @@
+<body>
+  <!-- Gornji header -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo" />
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <!-- Navigacija sa ikonama -->
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link">
+      <i class="fa fa-home"></i><span>Početna</span>
+    </a>
+    <a routerLink="/samplesView" routerLinkActive="active-link">
+      <i class="fa fa-flask"></i><span>Pregled uzoraka</span>
+    </a>
+    <a routerLink="/addNewSample" routerLinkActive="active-link">
+      <i class="fa fa-plus-circle"></i><span>Dodavanje uzorka</span>
+    </a>
+    <a routerLink="/invoice" routerLinkActive="active-link">
+      <i class="fa fa-clipboard-list"></i><span>Evidencija</span>
+    </a>
+    <a routerLink="/report" routerLinkActive="active-link">
+      <i class="fa fa-chart-line"></i><span>Izveštavanje</span>
+    </a>
+  </nav>
+
+  <!-- Glavni sadržaj -->
+  <main class="content-area">
+    <section class="sample-details">
+      <h3 class="section-title">
+        <i class="fa fa-flask"></i> Podaci o uzorku
+      </h3>
+
+      <div class="details-grid">
+        <div><strong>Interna oznaka:</strong> {{ sample.internID }}</div>
+        <div><strong>Broj uzorka:</strong> {{ sample.sampleID }}</div>
+        <div><strong>Naziv uzorka:</strong> {{ sample.name }}</div>
+        <div><strong>Poreklo:</strong> {{ sample.origin }}</div>
+        <div><strong>Datum prijema:</strong> {{ sample.dateReception | date: 'dd.MM.yyyy' }}</div>
+        <div><strong>Datum merenja:</strong> {{ sample.dateMeasure | date: 'dd.MM.yyyy' }}</div>
+        <div><strong>Vrsta ispitivanja:</strong>
+          @if(sample.type == ""){
+            /
+          }
+          @else{
+            {{ sample.type }}
+          }
+          </div>
+        <div><strong>Napomena:</strong>
+          @if(sample.note == ""){
+            /
+          }
+          @else{
+            {{ sample.note }}
+          }</div>
+        <div><strong>Geometrija:</strong> {{ sample.geometry }}</div>
+        <div><strong>Detektor:</strong> {{ sample.detector }}</div>
+      </div>
+
+      <h4 class="section-subtitle">Rezultati merenja</h4>
+      <p class="results-sub">Korišćeni izotopi i specifične aktivnosti:</p>
+
+      <div class="results-list">
+        @for (is of calculation.isotopes; track $index; let i = $index) {
+          <div class="result-item">
+            <span class="isotope-name">{{ is }}:</span>
+            @if (calculation.errs[i] == -1) {
+              <span class="isotope-value">&lt; {{ calculation.values[i] | number:'1.2-2' }}</span>
+            } @else {
+              <span class="isotope-value">{{ calculation.values[i] | number:'1.2-2' }} ± {{ calculation.errs[i] | number:'1.2-2' }}</span>
+            }
+          </div>
+        }
+      </div>
+      <br>
+      <div class="examiner-box">
+        <h4>Ispitivač:</h4>
+        <p>{{ user.name }} {{ user.lastname }}</p>
+      </div>
+
+      <div class="examiner-box">
+        <h4>Tehnički rukovodilac:</h4>
+        <select id="technicalMenager" class="form-select" [(ngModel)]="selectedTechnicalMenager">
+          <option value="" disabled selected hidden>-- Odaberite tehničkog rukovodioca --</option>
+          <option value="Maja Gajić Kvaščev">dr Maja Gajić-Kvaščev</option>
+          <option value="Velibor Andrić">dr Velibor Andrić</option>
+        </select>
+      </div>
+      <button class="btn-generate" (click)="generateReport()">
+        <i class="fa fa-file-alt"></i> Generiši izveštaj
+      </button>
+    </section>
+  </main>
+</body>

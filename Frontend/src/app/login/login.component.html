@@ -1,0 +1,31 @@
+<body>
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo">
+    <h1>Veb platfoma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <form class="login-form animate-fade">
+    <h2>Prijava korisnika</h2>
+
+    <label for="username">Korisničko ime:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="username" />
+
+    <label for="password">Lozinka:</label>
+    <div class="password-container">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+      />
+      <i
+        class="fa"
+        [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+        (click)="togglePassword()"
+      ></i>
+    </div>
+
+    <button (click)="login()">Ulogujte se</button>
+    <p class="form-message">{{ message }}</p>
+  </form>
+</body>

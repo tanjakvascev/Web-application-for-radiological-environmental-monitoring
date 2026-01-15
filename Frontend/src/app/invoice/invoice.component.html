@@ -1,0 +1,114 @@
+<body>
+  <!-- Gornja navigacija -->
+  <header class="navbar">
+    <img src="logo_vinca.jpg" alt="Logo" class="logo">
+    <h1>Veb platforma za radiološki monitoring životne sredine</h1>
+  </header>
+
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out-alt"></i> Odjava
+  </button>
+
+  <!-- Sekundarna navigacija -->
+  <nav class="nav-links">
+    <a routerLink="/home" routerLinkActive="active-link">
+      <i class="fa fa-home"></i><span>Početna</span>
+    </a>
+    <a routerLink="/samplesView" routerLinkActive="active-link">
+      <i class="fa fa-flask"></i><span>Pregled uzoraka</span>
+    </a>
+    <a routerLink="/addNewSample" routerLinkActive="active-link">
+      <i class="fa fa-plus-circle"></i><span>Dodavanje uzorka</span>
+    </a>
+    <a routerLink="/invoice" routerLinkActive="active-link">
+      <i class="fa fa-clipboard-list"></i><span>Evidencija</span>
+    </a>
+    <a routerLink="/report" routerLinkActive="active-link">
+      <i class="fa fa-chart-line"></i><span>Izveštavanje</span>
+    </a>
+  </nav>
+
+  <!-- Glavni sadržaj -->
+  <main class="invoice-page">
+    <h2 class="page-title">Evidencija uzoraka</h2>
+
+    <!-- Postojeći zapisi -->
+    <section class="card-section">
+      <h3><i class="fa fa-clipboard-list"></i> Postojeći zapisi</h3>
+
+      @if (invoices.length > 0) {
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Datum prijema</th>
+                <th>Broj zahteva</th>
+                <th>Primljeni uzorci</th>
+                <th>Broj uzoraka</th>
+                <th>Komentar</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (inv of invoices; track $index) {
+                <tr>
+                  <td>{{ inv.date | date: 'dd.MM.yyyy' }}</td>
+                  <td>{{ inv.requestNumber }}</td>
+                  <td>{{ inv.internIDs }}</td>
+                  <td>{{ inv.sampleNumber }}</td>
+                  <td>{{ inv.comment }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <div class="alert-box">Trenutno nema unetih zapisa u bazi.</div>
+      }
+    </section>
+
+    <!-- Dodavanje novih zapisa -->
+    <section class="card-section">
+      <h3><i class="fa fa-plus-circle"></i> Dodavanje nove evidencije</h3>
+
+      @if (newInvoices.length > 0) {
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Datum prijema</th>
+                <th>Broj zahteva</th>
+                <th>Primljeni uzorci</th>
+                <th>Broj uzoraka</th>
+                <th>Komentar</th>
+                <th>Obriši</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (inv of newInvoices; track $index; let i = $index) {
+                <tr>
+                  <td><input type="date" [(ngModel)]="inv.date" /></td>
+                  <td><input type="number" [(ngModel)]="inv.requestNumber" /></td>
+                  <td><input type="text" [(ngModel)]="inv.internIDs" placeholder="npr. EH25/2005-2006" /></td>
+                  <td><input type="number" [(ngModel)]="inv.sampleNumber" /></td>
+                  <td><input type="text" [(ngModel)]="inv.comment" placeholder="Komentar..." /></td>
+                  <td>
+                    <button class="icon-btn danger" (click)="removeInvoice(i)" title="Obriši">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <div class="alert-box">Nema novih evidencija.</div>
+      }
+
+      <div class="actions">
+        <button class="btn-outline" (click)="addInvoice()">➕ Dodaj novu evidenciju</button>
+        <button class="btn-primary" (click)="saveInvoices()">💾 Sačuvaj nove evidencije</button>
+      </div>
+    </section>
+  </main>
+</body>

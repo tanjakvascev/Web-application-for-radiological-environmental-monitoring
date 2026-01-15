@@ -1,0 +1,127 @@
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  color: #1b2b52;
+}
+
+/* Header */
+header.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+.navbar img.logo {
+  position: absolute;
+  left: 40px;
+  height: 70px;
+  border-radius: 6px;
+}
+.navbar h1 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* SADRŽAJ */
+.home-content {
+  padding-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Naslov dobrodošlice */
+.welcome-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.welcome-section h2 {
+  color: #1b2b52;
+  font-size: 1.7rem;
+  margin-bottom: 8px;
+}
+
+.welcome-section p {
+  color: #5c677d;
+  font-size: 1rem;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  width: 90%;
+  max-width: 700px;
+  justify-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.menu-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #1b2b52;
+  padding: 30px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 240px;
+}
+
+.menu-card i {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #5cb85c;
+}
+
+
+.menu-card:hover {
+  background-color: #1b2b52;
+  color: #ffffff;
+  transform: translateY(-6px);
+}
+
+.menu-card:hover i {
+  color: #a8dadc;
+}
+
+.logout-btn {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  background-color: #5cb85c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+}
+
+.logout-btn i {
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 12px rgba(92, 184, 92, 0.4);
+}
+

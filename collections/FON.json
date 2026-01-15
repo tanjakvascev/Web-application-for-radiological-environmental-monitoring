@@ -1,0 +1,20 @@
+[
+  {
+    "isotope": "Cs-137",
+    "geometry": "M450",
+    "detector": "D3",
+    "FON": [20]
+  },
+  {
+    "isotope": "K-40",
+    "geometry": "M450",
+    "detector": "D3",
+    "FON": [6326]
+  },
+  {
+    "isotope": "Cs-134",
+    "geometry": "M450",
+    "detector": "D3",
+    "FON": [8, 39]
+  }
+]

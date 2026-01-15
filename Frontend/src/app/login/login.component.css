@@ -1,0 +1,168 @@
+/* Globalni stil */
+body {
+  background-color: #f0f2f5;
+  color: #1b2b52;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* Navigaciona traka */
+header.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #1b2b52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Logo levo */
+.navbar img.logo {
+  position: absolute;
+  left: 30px;                  /* fiksiran levo */
+  height: 70px;
+  border-radius: 6px;
+  padding: 1px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Naslov na sredini */
+.navbar h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f1f3f5;
+  letter-spacing: 1px;
+  margin: 0;
+  text-align: center;
+}
+
+
+/* Forma */
+.login-form {
+  background-color: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  padding: 45px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  width: 100%;
+  max-width: 420px;
+  margin-top: 90px;
+  animation: fadeInUp 1s ease;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1b2b52;
+  font-weight: 600;
+}
+
+/* Kontejner za lozinku + ikonicu */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* prostor za ikonicu */
+}
+
+.password-container i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aab8c2;
+  transition: color 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.password-container i:hover {
+  color: #dee2e6;
+}
+
+
+/* Tekst i polja */
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+  color: #1b2b52;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  outline: none;
+  background-color: #f8f9fa;
+  color: #1b2b52;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+input:hover {
+  background-color: #ffffff;
+  border-color: #a2d2ff;
+}
+
+input:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 3px rgba(92, 184, 92, 0.25);
+}
+
+
+/* Dugme */
+button {
+  width: 100%;
+  background-color: #5cb85c; /* umirena zelena */
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px;
+  margin-top: 25px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(92, 184, 92, 0.2);
+}
+
+button:hover {
+  background-color: #4cae4c;
+  box-shadow: 0 0 14px rgba(92, 184, 92, 0.4);
+}
+
+/* Poruka ispod forme */
+.form-message {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #a8dadc;
+}
+
+/* Animacije */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
